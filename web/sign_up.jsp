@@ -42,14 +42,20 @@
                     <tr>
                         <td>Id Number *</td>
                         <td><input type="text" name="id" required></td>
-                    </tr>
-                    <tr>
-                        <td>Bio  *</td>
-                        <td><textarea name="bio" placeholder="Tell us about yourself" > </textarea></td>
-                    </tr>
+                    </tr>              
                     <tr>
                         <td>Location *</td>
                         <td><input type="text" name="location"></td>
+                    </tr>
+                    <tr>
+                        <td>Roles: </td>
+                        <td>
+                            <select name="type">
+                                <option value="user">Default User</option>
+                                <option value="artist">Artist</option>
+                            </select>
+                        </td>
+                        
                     </tr>
                     <tr>
                         <td>Password *</td>

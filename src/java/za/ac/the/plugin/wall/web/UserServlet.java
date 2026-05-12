@@ -51,10 +51,9 @@ public class UserServlet extends HttpServlet {
             String email = request.getParameter("email");
             String dobStr = request.getParameter("dob");
             Long idNumber = Long.parseLong(request.getParameter("id")); // Fixed the name conflict
-            String bio = request.getParameter("bio");
             String location = request.getParameter("location");
             String type = request.getParameter("type");
-
+            String pass = request.getParameter("password");
             // 2. Data Conversion: HTML date input comes as "yyyy-MM-dd"
             Date dob = new SimpleDateFormat("yyyy-MM-dd").parse(dobStr);
 
@@ -69,6 +68,7 @@ public class UserServlet extends HttpServlet {
             newUser.setDateOfBirth(dob);
             newUser.setId(idNumber);
             newUser.setLocation(location);
+            
             
             ufl.create(newUser);            
             if(type.equals("artist"))

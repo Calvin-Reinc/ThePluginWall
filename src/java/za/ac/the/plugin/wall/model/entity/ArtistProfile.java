@@ -33,6 +33,8 @@ public class ArtistProfile implements Serializable {
     @JoinColumn(name = "userId")
     private User user;
     
+    private String bio;
+    
     @Column(name = "spotify_url")
     private String spotifyUrl;
 
@@ -44,6 +46,15 @@ public class ArtistProfile implements Serializable {
 
     public ArtistProfile() {
     }
+
+    public String getBio() {
+        return bio;
+    }
+
+    public void setBio(String bio) {
+        this.bio = bio;
+    }
+    
 
     public User getUser() {
         return user;

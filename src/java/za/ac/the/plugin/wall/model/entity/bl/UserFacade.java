@@ -5,6 +5,7 @@
  */
 package za.ac.the.plugin.wall.model.entity.bl;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,7 +30,10 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
     public UserFacade() {
         super(User.class);
     }
-
+    
+    /* 
+       the artistProfile must contain Followers(List or colection)
+    */
     @Override
     public User findByEmail(String email) {
         Query q = em.createQuery("SELECT u FROM User u WHERE u.email = :mail");
@@ -38,6 +42,7 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
         return us;
     }
     
-    
-    
 }
+    
+    
+    
