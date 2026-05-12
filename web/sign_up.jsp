@@ -53,11 +53,17 @@
                     </tr>
                     <tr>
                         <td>Password *</td>
-                        <td><input type="password" name="password" required></td>
+                        <!-- Added id="password" -->
+                        <td><input type="password" id="password" name="password" required></td>
                     </tr>
                     <tr>
                         <td>Confirmation Password *</td>
-                        <td><input type="password" name="password" required></td>
+                        <td>
+                            <!-- Added id="confirmPassword" and onkeyup event -->
+                            <input type="password" id="confirmPassword" name="confirmPassword" onkeyup="checkPasswordMatch();" required>
+                            <br>
+                            <span id="message" style="font-size: 12px;"></span>
+                        </td>
                     </tr>
                     
                     <tr>
@@ -69,5 +75,28 @@
 
             
         </form>
+        <script>
+    function checkPasswordMatch() {
+        var password = document.getElementById("password").value;
+        var confirmPassword = document.getElementById("confirmPassword").value;
+        var message = document.getElementById("message");
+        var submitBtn = document.querySelector('input[type="submit"]');
+
+        if (password === "" || confirmPassword === "") {
+            message.innerHTML = "";
+            return;
+        }
+
+        if (password === confirmPassword) {
+            message.style.color = "green";
+            message.innerHTML = "✔ Passwords match";
+            submitBtn.disabled = false; // Enable the button
+        } else {
+            message.style.color = "red";
+            message.innerHTML = "✖ Passwords do not match";
+            submitBtn.disabled = true; // Disable the button to prevent submission
+        }
+    }
+</script>
     </body>
 </html>
