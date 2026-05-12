@@ -4,7 +4,7 @@
     Author     : VUKONA
 --%>
 
-<%@page import="com.the.plugin.wall.entities.User"%>
+<%@page import="za.ac.the.plugin.wall.model.entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -31,7 +31,7 @@
             <h1>Welcome to the Wall!</h1>
             <p class="meta">You have successfully registered as:</p>
             <div class="artist-name">@<%= artist.getUsername() %></div>
-            
+            <p class="meta">Member since: <%= artist.getCreation_date()%></p>
             <p><strong>Full Name:</strong> <%= artist.getFirstName() %> <%= artist.getLastName() %></p>
             <p><strong>Location:</strong> <%= artist.getLocation() %></p>
             

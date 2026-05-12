@@ -25,11 +25,15 @@ public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     private Long id;
+    
     @Column(name = "first_name", nullable = false)
     private String firstName;
 
     @Column(name = "last_name", nullable = false)
     private String lastName;
+
+    @Column(name = "username", nullable = false)
+    private String username;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "date_of_birth", nullable = false)
@@ -44,12 +48,32 @@ public class User implements Serializable {
     @Column(nullable = false)
     private String password;
 
+    private String location;
+
     @Column(nullable = false)
     private String role; // "Artist" or "Viewer"
     @Temporal(TemporalType.DATE)
     Date creation_date;
+    
+    
 
     public User() {
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
     
 
