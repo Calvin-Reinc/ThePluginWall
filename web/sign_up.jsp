@@ -70,6 +70,7 @@
                         <td></td>
                         <td><input type="submit" value="Sign Up"></td>
                     </tr>
+                    
 
             </table>
 

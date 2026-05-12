@@ -4,7 +4,7 @@
     Author     : VUKONA
 --%>
 
-<%@page import="com.thepluginwall.entities.User"%>
+<%@page import="com.the.plugin.wall.entities.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
