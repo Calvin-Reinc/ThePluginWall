@@ -42,6 +42,7 @@
             <p class="meta">Your profile is now pending upload to the cloud.</p>
             
             <a href="index.jsp" class="btn">View Global Board</a>
+            <p>test</p>
         </div>
         <%
             } else {
