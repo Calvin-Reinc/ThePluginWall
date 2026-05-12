@@ -55,7 +55,7 @@ public class User implements Serializable {
     @Temporal(TemporalType.DATE)
     Date creation_date;
     
-    
+    private int test;
 
     public User() {
     }
