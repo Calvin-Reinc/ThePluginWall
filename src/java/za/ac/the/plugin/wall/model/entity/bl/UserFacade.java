@@ -5,9 +5,11 @@
  */
 package za.ac.the.plugin.wall.model.entity.bl;
 
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.Query;
 import za.ac.the.plugin.wall.model.entity.User;
 
 /**
@@ -29,9 +31,16 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
         super(User.class);
     }
     
+    /* 
+       the artistProfile must contain Followers(List or colection)
+    */
     @Override
-    public void registerNewUser(User user) {
-    
+    public List<String> getNumberOfFans() {
+        //need to check the query 
+        Query q = em.createQuery("select count(followers) from ArtistProfile");
+        List<String> totalFollowers = q.getResultList();
+        
+        return totalFollowers;
     }
     
 }

@@ -52,6 +52,18 @@
                         <td><input type="text" name="location"></td>
                     </tr>
                     <tr>
+                        <td>Roles: </td>
+                        <td>
+                            <select name="type">
+                                <option value="user">Default User</option>
+                                <option value="artist">Artist</option>
+                            </select>
+                        </td>
+                        
+                        
+                        <td><input type="text" name="location"></td>
+                    </tr>
+                    <tr>
                         <td>Password *</td>
                         <!-- Added id="password" -->
                         <td><input type="password" id="password" name="password" required></td>
