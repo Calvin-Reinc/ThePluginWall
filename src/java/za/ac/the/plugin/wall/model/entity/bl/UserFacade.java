@@ -14,7 +14,7 @@ import za.ac.the.plugin.wall.model.entity.User;
 
 /**
  *
- * @author khali
+ * @author VUKONA
  */
 @Stateless
 public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal {
@@ -35,12 +35,14 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
        the artistProfile must contain Followers(List or colection)
     */
     @Override
-    public List<String> getNumberOfFans() {
-        //need to check the query 
-        Query q = em.createQuery("select count(followers) from ArtistProfile");
-        List<String> totalFollowers = q.getResultList();
-        
-        return totalFollowers;
+    public User findByEmail(String email) {
+        Query q = em.createQuery("SELECT u FROM User u WHERE u.email = :mail");
+        q.setParameter("ma", email);
+        User us = (User)q.getSingleResult();
+        return us;
     }
     
 }
+    
+    
+    

@@ -11,12 +11,11 @@ import za.ac.the.plugin.wall.model.entity.User;
 
 /**
  *
- * @author khali
+ * @author VUKONA
  */
 @Local
 public interface UserFacadeLocal {
-    List<String> getNumberOfFans();
-    
+
     void create(User user);
 
     void edit(User user);
@@ -30,5 +29,7 @@ public interface UserFacadeLocal {
     List<User> findRange(int[] range);
 
     int count();
+
+    User findByEmail(String email);
     
 }

@@ -54,8 +54,6 @@ public class User implements Serializable {
     private String role; // "Artist" or "Viewer"
     @Temporal(TemporalType.DATE)
     Date creation_date;
-    
-    private int test;
 
     public User() {
     }

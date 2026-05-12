@@ -11,6 +11,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -23,8 +26,21 @@ public class ViewerProfile implements Serializable {
     @Id
     @Column(name = "user_id")
     private Long id;
+    @OneToOne
+    @MapsId // This tells JPA to use the User's ID as this record's ID
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
     
     private String preferredGenre;
+    
 
     public String getPreferredGenre() {
         return preferredGenre;
