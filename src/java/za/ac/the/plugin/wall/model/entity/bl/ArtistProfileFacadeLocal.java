@@ -15,6 +15,8 @@ import za.ac.the.plugin.wall.model.entity.ArtistProfile;
  */
 @Local
 public interface ArtistProfileFacadeLocal {
+    
+    //
 
     void create(ArtistProfile artistProfile);
 

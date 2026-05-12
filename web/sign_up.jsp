@@ -41,7 +41,7 @@
                     </tr>
                     <tr>
                         <td>Id Number *</td>
-                        <td><input type="text" name="id" required></td>
+                        <td><input type="text" name="id" required minlength="13" maxlength="13"></td>
                     </tr>
                     <tr>
                         <td>Bio  *</td>

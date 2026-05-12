@@ -70,7 +70,8 @@ public class UserServlet extends HttpServlet {
             newUser.setId(idNumber);
             newUser.setLocation(location);
             
-            ufl.create(newUser);            
+            ufl.create(newUser);
+            
             if(type.equals("artist"))
             {
                 ArtistProfile art = new ArtistProfile();
