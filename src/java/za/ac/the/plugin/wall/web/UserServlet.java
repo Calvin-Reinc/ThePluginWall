@@ -10,11 +10,19 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.ejb.EJB;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import za.ac.the.plugin.wall.model.entity.ArtistProfile;
+import za.ac.the.plugin.wall.model.entity.User;
+import za.ac.the.plugin.wall.model.entity.ViewerProfile;
+import za.ac.the.plugin.wall.model.entity.bl.ArtistProfileFacadeLocal;
+import za.ac.the.plugin.wall.model.entity.bl.UserFacadeLocal;
+import za.ac.the.plugin.wall.model.entity.bl.ViewerProfileFacadeLocal;
 
 /**
  *
@@ -22,10 +30,19 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class UserServlet extends HttpServlet {
 
+    @EJB
+    UserFacadeLocal ufl;
+    @EJB
+    ArtistProfileFacadeLocal afl;
+    @EJB
+    ViewerProfileFacadeLocal vfl;
+    
     
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+            HttpSession hs = request.getSession(true);
+            
         try {
             // 1. Capture data from the form using your specific 'name' attributes
             String firstName = request.getParameter("fname");
@@ -36,29 +53,46 @@ public class UserServlet extends HttpServlet {
             Long idNumber = Long.parseLong(request.getParameter("id")); // Fixed the name conflict
             String bio = request.getParameter("bio");
             String location = request.getParameter("location");
+            String type = request.getParameter("type");
 
             // 2. Data Conversion: HTML date input comes as "yyyy-MM-dd"
             Date dob = new SimpleDateFormat("yyyy-MM-dd").parse(dobStr);
 
             // 3. Populate the Entity (The Object)
-            /*
+            String path;
+            
             User newUser = new User();
             newUser.setFirstName(firstName);
             newUser.setLastName(lastName);
             newUser.setUsername(artistName);
             newUser.setEmail(email);
             newUser.setDateOfBirth(dob);
-            newUser.setIdNumber(idNumber);
-            newUser.setBio(bio);
+            newUser.setId(idNumber);
             newUser.setLocation(location);
-            */
+            
+            ufl.create(newUser);            
+            if(type.equals("artist"))
+            {
+                ArtistProfile art = new ArtistProfile();
+                art.setUser(newUser);
+                
+                afl.create(art);
+                
+                path = "welcome.jsp";
+                hs.setAttribute("user", newUser);
+                hs.setAttribute("userA", art);
+                
+            }else{
+                ViewerProfile vp = new ViewerProfile();
+                vp.setUser(newUser);
+                hs.setAttribute("user", newUser);
+                hs.setAttribute("userV", vp);
 
-            // 4. Industry Step: Attach the object to the request
-            // This allows the next page to "see" the artist data
-            //request.setAttribute("registeredUser", newUser);
-
-            // 5. Use RequestDispatcher to forward to the welcome page
-            RequestDispatcher dispatcher = request.getRequestDispatcher("welcome.jsp");
+                vfl.create(vp);
+                path = "viewer.jsp";
+            }
+            
+            RequestDispatcher dispatcher = request.getRequestDispatcher(path);
             dispatcher.forward(request, response);
 
         } catch (Exception e) {
@@ -68,7 +102,7 @@ public class UserServlet extends HttpServlet {
             RequestDispatcher errorDispatcher = request.getRequestDispatcher("sign_in.jsp");
             errorDispatcher.forward(request, response);
         }
-            
+        
     }
 
 
