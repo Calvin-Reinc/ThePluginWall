@@ -71,7 +71,7 @@ public class UserServlet extends HttpServlet {
             
             
             ufl.create(newUser);            
-            if(type.equals("artist"))
+            if(type.equals("Artist"))
             {
                 ArtistProfile art = new ArtistProfile();
                 art.setUser(newUser);
