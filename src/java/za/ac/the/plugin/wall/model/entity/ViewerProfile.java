@@ -33,7 +33,6 @@ public class ViewerProfile implements Serializable {
     public void setPreferredGenre(String preferredGenre) {
         this.preferredGenre = preferredGenre;
     }
-    
 
     public ViewerProfile() {
     }
