@@ -44,16 +44,16 @@ public class LoginServlet extends HttpServlet {
         if (user != null && user.getPassword().equals(password)) {
             // SUCCESS: Start the Session
             HttpSession session = request.getSession(true);
-            session.setAttribute("currentUser", user);
+            session.setAttribute("user", user);
 
             // ROUTE: Based on Role [cite: 33]
             if ("Artist".equals(user.getRole())) {
                 ArtistProfile artist = afl.find(user.getId());
-                session.setAttribute("currentProfile", artist);
+                session.setAttribute("userA", artist);
                 response.sendRedirect("artist_dashboard.jsp");
             } else {
                 ViewerProfile viewer = vfl.find(user.getId());
-                session.setAttribute("currentProfile", viewer);
+                session.setAttribute("userV", viewer);
                 response.sendRedirect("viewer_feed.jsp");
             }
         } else {
