@@ -36,7 +36,7 @@ public class UserFacade extends AbstractFacade<User> implements UserFacadeLocal 
     */
     @Override
     public User findByEmail(String email) {
-        Query q = em.createQuery("SELECT u FROM User u WHERE u.email = :mail");
+        Query q = em.createQuery("SELECT u FROM User u WHERE u.email = :ma");
         q.setParameter("ma", email);
         User us = (User)q.getSingleResult();
         return us;

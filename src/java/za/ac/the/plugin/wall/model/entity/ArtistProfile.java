@@ -30,7 +30,7 @@ public class ArtistProfile implements Serializable {
     
     @OneToOne
     @MapsId
-    @JoinColumn(name = "userId")
+    @JoinColumn(name = "id")
     private User user;
     
     private String bio;

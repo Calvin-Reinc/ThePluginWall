@@ -28,7 +28,7 @@ public class ViewerProfile implements Serializable {
     private Long id;
     @OneToOne
     @MapsId // This tells JPA to use the User's ID as this record's ID
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "id")
     private User user;
 
     public User getUser() {

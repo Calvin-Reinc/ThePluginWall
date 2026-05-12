@@ -51,8 +51,8 @@
                         <td>Roles: </td>
                         <td>
                             <select name="type">
-                                <option value="user">Default User</option>
-                                <option value="artist">Artist</option>
+                                <option value="User">Default User</option>
+                                <option value="Artist">Artist</option>
                             </select>
                         </td>
                         

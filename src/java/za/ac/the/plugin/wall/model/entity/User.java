@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -20,10 +21,12 @@ import javax.persistence.TemporalType;
  * @author VUKONA
  */
 @Entity
+@Table(name = "users")
 public class User implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     
     @Column(name = "first_name", nullable = false)
@@ -39,18 +42,14 @@ public class User implements Serializable {
     @Column(name = "date_of_birth", nullable = false)
     private Date dateOfBirth;
 
-    @Column(name = "id_number", unique = true, nullable = false)
-    private String idNumber;
 
-    @Column(unique = true, nullable = false)
+    @Column(unique = true)
     private String email;
 
-    @Column(nullable = false)
     private String password;
 
     private String location;
 
-    @Column(nullable = false)
     private String role; // "Artist" or "Viewer"
     @Temporal(TemporalType.DATE)
     Date creation_date;
@@ -116,13 +115,8 @@ public class User implements Serializable {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public String getIdNumber() {
-        return idNumber;
-    }
 
-    public void setIdNumber(String idNumber) {
-        this.idNumber = idNumber;
-    }
+
 
     public String getEmail() {
         return email;
