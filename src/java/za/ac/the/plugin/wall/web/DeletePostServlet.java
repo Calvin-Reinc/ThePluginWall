@@ -50,7 +50,7 @@ public class DeletePostServlet extends HttpServlet {
 
                     // 3. REFRESH SESSION DATA
                     // Fetch fresh list from DB using the artist's ID 
-                    List<Post> updatedPosts = pfl.findByArtist(artist.getId());
+                    List<Post> updatedPosts = pfl.findAllByArtist(artist);
                     
                     // Recalculate stats for the dashboard display 
                     int updatedLikes = (int)session.getAttribute("totalLikes");
