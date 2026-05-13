@@ -83,7 +83,7 @@ public class PostServlet extends HttpServlet {
             newPost.setArtist(artist);
             newPost.setImageName(finalFileName);
             newPost.setLikes(0);
-            pf.create(newPost);
+            pf.createPost(newPost);
         }
 
         response.sendRedirect("ArtistDashServlet.do");
