@@ -50,10 +50,11 @@
 
                     <hr style="border: 0; border-top: 1px solid #333; margin: 15px 0;">
                         <p> the value of imageNAME is ${p.imageName}</p>
+                        
+                    <c:if test="${not empty post.imageName}">
                         <img src="${pageContext.request.contextPath}/ImageDisplayServlet.do?name=${post.imageName}" 
-                             alt="Post Image"
-                             style="width: 100%; max-width: 500px; display: block; margin: 10px 0;">
-                    
+                             style="width: 200px;">
+                    </c:if>
                     <%-- Interaction Row --%>
                     <div style="display: flex; align-items: center; gap: 20px;">
                         <span style="font-weight: bold;">👍 ${post.likes} Likes</span>
