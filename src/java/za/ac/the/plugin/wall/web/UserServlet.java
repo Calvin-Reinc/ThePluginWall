@@ -97,7 +97,7 @@ public class UserServlet extends HttpServlet {
             
         }
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("sign_up.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("sign_in.jsp");
         dispatcher.forward(request, response);
 
     } catch (Exception e) {
