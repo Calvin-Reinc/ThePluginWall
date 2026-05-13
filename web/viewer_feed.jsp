@@ -18,7 +18,7 @@
         ${posts != null ? "Posts object arrived" : "Posts object is NULL"}
         <c:forEach var="post" items="${posts}">
             <a href="PostPageServlet.do?postId=${post.id}">
-            <div class="post-container" style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
+            
                 <h3>${post.artist.user.username} posted:</h3>
                 <p>${post.content}</p>
                 <small>Posted on: ${post.creationDate}</small>
@@ -34,6 +34,7 @@
                     <button type="submit" style="cursor: pointer;">Like</button>
                 </form>
                 </div>
+            </a>
                 <hr>
                 <h4>Comments</h4>
                 <c:forEach var="comment" items="${post.comments}">
@@ -49,8 +50,8 @@
                     <input type="submit" value="Reply">
                 </form>
                 
-            </div>
-            </a>
+            
+            
         </c:forEach>
     </body>
 </html>

@@ -3,7 +3,7 @@
     Created on : 12 May 2026, 10:17:18 PM
     Author     : VUKONA
 --%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="za.ac.the.plugin.wall.model.entity.ArtistProfile"%>
 <%@page import="za.ac.the.plugin.wall.model.entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
