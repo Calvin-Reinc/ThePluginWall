@@ -57,9 +57,7 @@ public class LoginServlet extends HttpServlet {
             } else {
                 ViewerProfile viewer = vfl.find(user.getId());
                 session.setAttribute("userV", viewer);
-                /*List<Post> allPosts = pf.findAllWithDetails();
-                request.setAttribute("posts", allPosts);
-                request.getRequestDispatcher("viewer_feed.jsp").forward(request, response);*/
+                
                 response.sendRedirect("FeedServlet.do");
             }
         } else {

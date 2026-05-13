@@ -40,6 +40,14 @@
         <servlet-name>ArtistDashServlet</servlet-name>
         <servlet-class>za.ac.the.plugin.wall.web.ArtistDashServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <servlet-class>za.ac.the.plugin.wall.web.DeleteUserServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DeletePostServlet</servlet-name>
+        <servlet-class>za.ac.the.plugin.wall.web.DeletePostServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/UserServlet.do</url-pattern>
@@ -79,6 +87,14 @@
     <servlet-mapping>
         <servlet-name>ArtistDashServlet</servlet-name>
         <url-pattern>/ArtistDashServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeleteUserServlet</servlet-name>
+        <url-pattern>/DeleteUserServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePostServlet</servlet-name>
+        <url-pattern>/DeletePostServlet.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
