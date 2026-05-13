@@ -66,6 +66,7 @@ public class ArtistDashServlet extends HttpServlet {
                 request.setAttribute("totalComments", totalComments);
 
                 request.getRequestDispatcher("artist_dashboard.jsp").forward(request, response);
+                
             } else {
                 response.sendRedirect("issue.jsp");
             }

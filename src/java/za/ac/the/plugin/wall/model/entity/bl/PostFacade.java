@@ -9,6 +9,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import za.ac.the.plugin.wall.model.entity.ArtistProfile;
 import za.ac.the.plugin.wall.model.entity.Post;
 
 /**
@@ -30,6 +31,7 @@ public class PostFacade extends AbstractFacade<Post> implements PostFacadeLocal 
         super(Post.class);
     }
     
+    @Override
     public List<Post> findAllWithDetails() {
         return em.createQuery(
             "SELECT DISTINCT p FROM Post p LEFT JOIN FETCH p.comments LEFT JOIN FETCH p.artist", 
@@ -47,15 +49,17 @@ public class PostFacade extends AbstractFacade<Post> implements PostFacadeLocal 
     
     @Override
     public List<Post> findAllFresh() {
-        return em.createQuery("SELECT p FROM Post p", Post.class)
-            .setHint("javax.persistence.cache.retrieveMode", "BYPASS")
-            .getResultList();
+        return em.createQuery("SELECT p FROM Post p ORDER BY p.creationDate DESC")
+             .setHint("javax.persistence.cache.retrieveMode", "BYPASS")
+             .getResultList();
     }
     
     @Override
-    public List<Post> findByArtist(Long artistId) {
-        return em.createQuery("SELECT p FROM Post p WHERE p.artist.id = :id", Post.class)
-                 .setParameter("id", artistId)
+    public List<Post> findAllByArtist(ArtistProfile artist) {
+        return em.createQuery("SELECT p FROM Post p WHERE p.artist = :artist ORDER BY p.creationDate DESC", Post.class)
+                 .setParameter("artist", artist)
+                 // This forces the cache to refresh with data from the DB
+                 .setHint("eclipselink.refresh", "true") 
                  .getResultList();
     }
     
@@ -67,5 +71,12 @@ public class PostFacade extends AbstractFacade<Post> implements PostFacadeLocal 
     @Override
     public void refresh(Post post) {
         em.refresh(em.merge(post));
+    }
+    
+    @Override
+    public void createPost(Post post) {
+        em.persist(post);
+        em.flush();
+        
     }
 }

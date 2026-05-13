@@ -7,6 +7,7 @@ package za.ac.the.plugin.wall.model.entity.bl;
 
 import java.util.List;
 import javax.ejb.Local;
+import za.ac.the.plugin.wall.model.entity.ArtistProfile;
 import za.ac.the.plugin.wall.model.entity.Post;
 
 /**
@@ -15,7 +16,8 @@ import za.ac.the.plugin.wall.model.entity.Post;
  */
 @Local
 public interface PostFacadeLocal {
-    List<Post> findByArtist(Long artistId);
+    List<Post> findAllByArtist(ArtistProfile artist);
+    void createPost(Post post);
     void refresh(Post post);
     void flush();
     List<Post> findAllFresh();
