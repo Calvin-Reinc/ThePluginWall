@@ -6,8 +6,6 @@
 package za.ac.the.plugin.wall.web;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import za.ac.the.plugin.wall.model.entity.ArtistProfile;
-import za.ac.the.plugin.wall.model.entity.Post;
 import za.ac.the.plugin.wall.model.entity.User;
 import za.ac.the.plugin.wall.model.entity.ViewerProfile;
 import za.ac.the.plugin.wall.model.entity.bl.ArtistProfileFacadeLocal;

@@ -21,22 +21,19 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class ImageDisplayServlet extends HttpServlet {
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) 
+            throws ServletException, IOException {
+        
+        System.out.println("SERVLET REACHED!"); // This must show in the log
+        
         String fileName = request.getParameter("name");
-        if (fileName == null || fileName.isEmpty()) return;
-
-        // The exact same path you used in your PostServlet
         File file = new File("C:/plugin_uploads", fileName);
 
         if (file.exists()) {
-            // Tell the browser this is an image
-            String contentType = getServletContext().getMimeType(file.getName());
-            response.setContentType(contentType);
-            response.setContentLength((int) file.length());
-
-            // Copy the file to the response output stream
+            response.setContentType(getServletContext().getMimeType(file.getName()));
             try (FileInputStream in = new FileInputStream(file);
-                OutputStream out = response.getOutputStream()) {
+                 OutputStream out = response.getOutputStream()) {
                 byte[] buffer = new byte[8192];
                 int bytesRead;
                 while ((bytesRead = in.read(buffer)) != -1) {
@@ -45,6 +42,7 @@ public class ImageDisplayServlet extends HttpServlet {
             }
         }
     }
+    
 
     
     /**

@@ -1,15 +1,17 @@
 <%-- 
     Document   : create_post
-    Created on : May 12, 2026, 10:51:40 AM
-    Author     : khali
+    Updated on : 13 May 2026
+    Author     : khali / VUKONA
 --%>
-
+<%@page import="za.ac.the.plugin.wall.model.entity.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>create post Page</title>
+        <title>Create Post | The Plugin Wall</title>
+        <%-- Link to your NetBeans-compatible CSS --%>
+        <link rel="stylesheet" type="text/css" href="css.css">
     </head>
     <body>
         <h3>Share an Update</h3>

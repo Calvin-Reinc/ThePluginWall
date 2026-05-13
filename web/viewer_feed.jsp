@@ -1,6 +1,6 @@
 <%-- 
     Document   : viewer_feed
-    Created on : 12 May 2026, 10:23:43 PM
+    Updated on : 13 May 2026
     Author     : VUKONA
 --%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -11,57 +11,85 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Viewer Page</title>
+        <title>Community Feed | The Plugin Wall</title>
+        <link rel="stylesheet" type="text/css" href="css.css">
     </head>
     <body>
-        <h1>The Plugin Wall Feed(for users/all)</h1>
-        ${posts != null ? "Posts object arrived" : "Posts object is NULL"}
-        <c:forEach var="post" items="${posts}">
-            <a href="PostPageServlet.do?postId=${post.id}">
-            
-                <h3>${post.artist.user.username} posted:</h3>
-                <div class="post-card">
-                <p>${p.content}</p>
+        <%
+            // Security check: Ensure we know who is viewing
+            User user = (User) session.getAttribute("user");
+            if (user == null) {
+                response.sendRedirect("sign_in.jsp");
+                return;
+            }
+        %>
 
-                <c:if test="${not empty p.imageName}">
-                    <div class="post-image">
-                        <img src="ImageDisplayServlet?name=${p.imageName}" 
-                             alt="Post Image" 
-                        s     style="max-width: 100%; height: auto; border-radius: 4px; border: 1px solid #ddd;">
+        <div class="dashboard-header">
+            <h1>The Plugin Wall Feed</h1>
+            <p>Welcome back, <strong>@<%= user.getFirstName() + " " + user.getLastName() %></strong>! Discover what's new in the studio.</p>
+            <div style="margin-top: 10px;">
+                <a href="index.jsp" style="color: #4CAF50; font-weight: bold;">← Back to Global Board</a>
+            </div>
+        </div>
+
+        <%-- Debug message kept as requested but styled slightly --%>
+        <div style="text-align: center; color: #888; font-size: 12px; margin-bottom: 20px;">
+            ${posts != null ? "✔ Feed Synchronization Active" : "✖ Error: Feed Data NULL"}
+        </div>
+
+        <div style="max-width: 800px; margin: auto;">
+            <c:forEach var="post" items="${posts}">
+                <p style="color:red;">Checking post: ${p.id} - Image: [${post.imageName}]</p>
+                <div class="profile-links" style="margin-bottom: 30px;">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <h3 style="margin: 0; color: #4CAF50;">@${post.artist.user.username}</h3>
+                        <small style="color: #888;">${post.creationDate}</small>
                     </div>
-                </c:if>
-                </div>
-                <small>Posted on: ${post.creationDate}</small>
+                    
+                    <p style="font-size: 1.1rem; margin: 20px 0;">${post.content}</p>
 
-                <hr>
-                <div class="like-section" style="margin-bottom: 15px;">
-                    <span style="font-weight: bold; margin-right: 10px;">
-                        👍 ${post.likes} Likes
-                    </span>
-
-                <form action="LikePostServlet.do" method="POST">
-                    <input type="hidden" name="postId" value="${post.id}"> 
-                    <button type="submit" style="cursor: pointer;">Like</button>
-                </form>
-                </div>
-            </a>
-                <hr>
-                <h4>Comments</h4>
-                <c:forEach var="comment" items="${post.comments}">
-                    <div class="comment">
-                        <strong>${comment.author.username}:</strong> ${comment.text}
+                    <hr style="border: 0; border-top: 1px solid #333; margin: 15px 0;">
+                        <p> the value of imageNAME is ${p.imageName}</p>
+                        <img src="${pageContext.request.contextPath}/ImageDisplayServlet.do?name=${post.imageName}" 
+                             alt="Post Image"
+                             style="width: 100%; max-width: 500px; display: block; margin: 10px 0;">
+                    
+                    <%-- Interaction Row --%>
+                    <div style="display: flex; align-items: center; gap: 20px;">
+                        <span style="font-weight: bold;">👍 ${post.likes} Likes</span>
+                        
+                        <form action="LikePostServlet.do" method="POST" style="margin: 0;">
+                            <input type="hidden" name="postId" value="${post.id}"> 
+                            <button type="submit" class="btn-save" style="padding: 5px 15px; font-size: 14px;">Like</button>
+                        </form>
+                        
+                        <a href="PostPageServlet.do?postId=${post.id}" style="font-size: 14px;">View Full Thread</a>
                     </div>
-                </c:forEach>
 
-                <form action="CommentServlet.do" method="POST">
-                    <input type="hidden" name="postId" value="${post.id}">
-                    <input type="hidden" name="source" value="feed">
-                    <input type="text" name="commentText" placeholder="Write a comment..." required>
-                    <input type="submit" value="Reply">
-                </form>
-                
-            
-            
-        </c:forEach>
+                    <div style="background: rgba(0,0,0,0.2); padding: 15px; border-radius: 8px; margin-top: 20px;">
+                        <h4 style="margin-top: 0; font-size: 0.9rem; color: #b3b3b3;">Comments</h4>
+                        
+                        <c:forEach var="comment" items="${post.comments}">
+                            <div style="border-bottom: 1px solid #333; padding: 8px 0; font-size: 14px;">
+                                <strong style="color: #4CAF50;">${comment.author.username}:</strong> ${comment.text}
+                            </div>
+                        </c:forEach>
+
+                        <%-- Reply Form --%>
+                        <form action="CommentServlet.do" method="POST" style="margin-top: 15px; display: flex; gap: 10px;">
+                            <input type="hidden" name="postId" value="${post.id}">
+                            <input type="hidden" name="source" value="feed">
+                            <input type="text" name="commentText" placeholder="Write a comment..." required 
+                                   style="flex: 1; margin: 0; padding: 8px;">
+                            <input type="submit" value="Reply" class="btn-save" style="padding: 8px 15px; margin: 0;">
+                        </form>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+
+        <div style="text-align: center; margin-bottom: 50px;">
+            <a href="LogoutServlet.do" class="btn-logout">Logout</a>
+        </div>
     </body>
 </html>
