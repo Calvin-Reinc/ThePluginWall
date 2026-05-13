@@ -16,7 +16,6 @@ import za.ac.the.plugin.wall.model.entity.Post;
  */
 @Local
 public interface PostFacadeLocal {
-
     List<Post> findAllByArtist(ArtistProfile artist);
     void createPost(Post post);
     void refresh(Post post);
