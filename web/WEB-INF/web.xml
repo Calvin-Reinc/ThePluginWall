@@ -48,6 +48,11 @@
         <servlet-name>DeletePostServlet</servlet-name>
         <servlet-class>za.ac.the.plugin.wall.web.DeletePostServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ImageDisplayServlet</servlet-name>
+        <servlet-class>za.ac.the.plugin.wall.web.ImageDisplayServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/UserServlet.do</url-pattern>
@@ -96,6 +101,11 @@
         <servlet-name>DeletePostServlet</servlet-name>
         <url-pattern>/DeletePostServlet.do</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImageDisplayServlet</servlet-name>
+        <url-pattern>/ImageDisplayServlet.do</url-pattern>
+    </servlet-mapping>
+
     <session-config>
         <session-timeout>
             30
