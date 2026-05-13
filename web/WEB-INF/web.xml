@@ -16,6 +16,30 @@
         <servlet-name>LoginServlet</servlet-name>
         <servlet-class>za.ac.the.plugin.wall.web.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PostServlet</servlet-name>
+        <servlet-class>za.ac.the.plugin.wall.web.PostServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>FeedServlet</servlet-name>
+        <servlet-class>za.ac.the.plugin.wall.web.FeedServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CommentServlet</servlet-name>
+        <servlet-class>za.ac.the.plugin.wall.web.CommentServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LikePostServlet</servlet-name>
+        <servlet-class>za.ac.the.plugin.wall.web.LikePostServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>PostPageServlet</servlet-name>
+        <servlet-class>za.ac.the.plugin.wall.web.PostPageServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ArtistDashServlet</servlet-name>
+        <servlet-class>za.ac.the.plugin.wall.web.ArtistDashServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/UserServlet.do</url-pattern>
@@ -32,14 +56,33 @@
         <servlet-name>LoginServlet</servlet-name>
         <url-pattern>/LoginServlet.do</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostServlet</servlet-name>
+        <url-pattern>/PostServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>FeedServlet</servlet-name>
+        <url-pattern>/FeedServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CommentServlet</servlet-name>
+        <url-pattern>/CommentServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LikePostServlet</servlet-name>
+        <url-pattern>/LikePostServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PostPageServlet</servlet-name>
+        <url-pattern>/PostPageServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ArtistDashServlet</servlet-name>
+        <url-pattern>/ArtistDashServlet.do</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
         </session-timeout>
     </session-config>
 </web-app>
-
-
-
-
-

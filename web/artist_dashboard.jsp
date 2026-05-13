@@ -36,7 +36,9 @@
             <% if(request.getParameter("status") != null) { %>
                 <p style="color: green;">Profile updated successfully!</p>
             <% } %>
-
+            <br>
+            <a href="create_post.jsp">Create Post</a>
+            <br>
             <form action="UpdateArtistServlet.do" method="POST">
                 <table border="0" cellpadding="10">
                     <tr>
@@ -82,6 +84,48 @@
         <hr>
         <p><a href="LogoutServlet.do">Secure Logout</a></p>
         
+        <div class="dashboard-header">
+        <h2>Welcome back, ${user.username}!</h2>
+    
+        <div class="stats-row" style="display: flex; gap: 20px; margin-bottom: 30px;">
+            <div class="card">
+                <h3>${posts.size()}</h3>
+                <p>Total Posts</p>
+            </div>
+            <div class="card">
+                <h3>${totalLikes}</h3>
+                <p>Total Likes</p>
+            </div>
+            <div class="card">
+                <h3>${totalComments}</h3>
+                <p>Total Comments</p>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <h3>Your Recent Activity</h3>
+        <table border="1" style="width:100%; text-align: left; border-collapse: collapse;">
+            <tr style="background-color: #f2f2f2;">
+                <th>Post Content</th>
+                <th>Engagement</th>
+                <th>Actions</th>
+            </tr>
+            <c:forEach var="p" items="${posts}">
+                <tr>
+                    <td>${p.content}</td>
+                    <td>❤️ ${p.likes} | 💬 ${p.comments.size()}</td>
+                    <td>
+                        <a href="PostPageServlet.do?postId=${p.id}">View</a> | 
+
+                        <a href="DeletePostServlet.do?postId=${p.id}" 
+                           style="color: red;" 
+                           onclick="return confirm('Delete this post?')">Delete</a>
+                    </td>
+                </tr>
+            </c:forEach>
+        </table>
         
         
     </body>
