@@ -29,4 +29,15 @@ public class ArtistProfileFacade extends AbstractFacade<ArtistProfile> implement
         super(ArtistProfile.class);
     }
     
+    @Override
+    public ArtistProfile findByUserId(Long userId) {
+        try {
+            return em.createQuery("SELECT a FROM ArtistProfile a WHERE a.user.id = :uid", ArtistProfile.class)
+                     .setParameter("uid", userId)
+                     .getSingleResult();
+        } catch (Exception e) {
+            return null; // Returns null if no profile is found for this user
+        }
+    }
+    
 }
