@@ -14,34 +14,12 @@
         <link rel="stylesheet" type="text/css" href="css.css">
     </head>
     <body>
-        <%
-            // Security check: Ensure the session is active
-            User user = (User) session.getAttribute("user");
-            if (user == null) {
-                response.sendRedirect("sign_in.jsp");
-                return;
-            }
-        %>
-
-        <div class="dashboard-header">
-            <h1>Share with the Wall</h1>
-            <p>Post an update as <strong>@<%= user.getUsername() %></strong></p>
-        </div>
-
-        <div class="profile-links">
-            <h3>New Update</h3>
-            <form action="PostServlet.do" method="POST">
-                <%-- Hidden field to pass the User ID to the Servlet --%>
-                <input type="hidden" name="userId" value="<%= user.getId() %>">
-                
-                <label for="content">What's happening in the studio?</label>
-                <textarea id="content" name="content" rows="6" placeholder="Share a plugin tip, a new beat, or studio news..." required></textarea>
-                
-                <div style="margin-top: 20px;">
-                    <input type="submit" value="Post to the Wall" class="btn-save">
-                    <a href="artist_dashboard.jsp" style="margin-left: 15px; color: #ff4444;">Cancel</a>
-                </div>
-            </form>
-        </div>
+        <h3>Share an Update</h3>
+        <form action="PostServlet.do" method="POST" enctype="multipart/form-data">
+            <textarea name="content" rows="4" style="width: 100%; border-radius: 5px; padding: 10px;" placeholder="What's happening in the studio?"></textarea>
+            <br>
+            <input type="file" name="file" accept="image/*">
+            <input type="submit" value="Post to the Feed" style="margin-top: 10px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">
+        </form>
     </body>
 </html>

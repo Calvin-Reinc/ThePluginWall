@@ -39,6 +39,7 @@
 
         <div style="max-width: 800px; margin: auto;">
             <c:forEach var="post" items="${posts}">
+                <p style="color:red;">Checking post: ${p.id} - Image: [${post.imageName}]</p>
                 <div class="profile-links" style="margin-bottom: 30px;">
                     <div style="display: flex; justify-content: space-between; align-items: center;">
                         <h3 style="margin: 0; color: #4CAF50;">@${post.artist.user.username}</h3>
@@ -48,7 +49,11 @@
                     <p style="font-size: 1.1rem; margin: 20px 0;">${post.content}</p>
 
                     <hr style="border: 0; border-top: 1px solid #333; margin: 15px 0;">
-
+                        <p> the value of imageNAME is ${p.imageName}</p>
+                        <img src="${pageContext.request.contextPath}/ImageDisplayServlet.do?name=${post.imageName}" 
+                             alt="Post Image"
+                             style="width: 100%; max-width: 500px; display: block; margin: 10px 0;">
+                    
                     <%-- Interaction Row --%>
                     <div style="display: flex; align-items: center; gap: 20px;">
                         <span style="font-weight: bold;">👍 ${post.likes} Likes</span>
