@@ -48,8 +48,20 @@ public class Post implements Serializable {
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Comment> comments;
     
+    private String imageName;
+    
     private int likes; // Default is 0
 
+    public String getImageName() {
+        return imageName;
+    }
+
+    public void setImageName(String imageName) {
+        this.imageName = imageName;
+    }
+
+    
+    
     public int getLikes() {
         return likes;
     }

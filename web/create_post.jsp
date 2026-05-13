@@ -13,10 +13,11 @@
     </head>
     <body>
         <h3>Share an Update</h3>
-        <form action="PostServlet.do" method="POST">
+        <form action="PostServlet.do" method="POST" enctype="multipart/form-data">
             <textarea name="content" rows="4" style="width: 100%; border-radius: 5px; padding: 10px;" placeholder="What's happening in the studio?"></textarea>
             <br>
-            <input type="submit" value="Post to the Wall" style="margin-top: 10px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">
+            <input type="file" name="file" accept="image/*">
+            <input type="submit" value="Post to the Feed" style="margin-top: 10px; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; cursor: pointer;">
         </form>
     </body>
 </html>

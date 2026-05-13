@@ -40,6 +40,10 @@
         <servlet-name>ArtistDashServlet</servlet-name>
         <servlet-class>za.ac.the.plugin.wall.web.ArtistDashServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ImageDisplayServlet</servlet-name>
+        <servlet-class>za.ac.the.plugin.wall.web.ImageDisplayServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>UserServlet</servlet-name>
         <url-pattern>/UserServlet.do</url-pattern>
@@ -79,6 +83,10 @@
     <servlet-mapping>
         <servlet-name>ArtistDashServlet</servlet-name>
         <url-pattern>/ArtistDashServlet.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ImageDisplayServlet</servlet-name>
+        <url-pattern>/ImageDisplayServlet.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

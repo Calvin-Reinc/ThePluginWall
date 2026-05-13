@@ -20,7 +20,17 @@
             <a href="PostPageServlet.do?postId=${post.id}">
             
                 <h3>${post.artist.user.username} posted:</h3>
-                <p>${post.content}</p>
+                <div class="post-card">
+                <p>${p.content}</p>
+
+                <c:if test="${not empty p.imageName}">
+                    <div class="post-image">
+                        <img src="ImageDisplayServlet?name=${p.imageName}" 
+                             alt="Post Image" 
+                        s     style="max-width: 100%; height: auto; border-radius: 4px; border: 1px solid #ddd;">
+                    </div>
+                </c:if>
+                </div>
                 <small>Posted on: ${post.creationDate}</small>
 
                 <hr>
