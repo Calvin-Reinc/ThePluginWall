@@ -49,8 +49,7 @@ public class PostServlet extends HttpServlet {
             pf.create(newPost);
         }
 
-        RequestDispatcher dis = request.getRequestDispatcher("artist_dashboard.jsp");
-        dis.forward(request, response);
+        response.sendRedirect("ArtistDashServlet.do");
     }
 
     /**
