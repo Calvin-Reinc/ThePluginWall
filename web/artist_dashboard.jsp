@@ -1,6 +1,6 @@
 <%-- 
     Document   : artist_dashboard
-    Created on : 12 May 2026, 10:17:18 PM
+    Updated on : 13 May 2026
     Author     : VUKONA
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -11,7 +11,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Artist Dashboard Page</title>
+        <title>Artist Dashboard | The Plugin Wall</title>
         <link rel="stylesheet" type="text/css" href="css.css">
     </head>
     <body>
@@ -27,9 +27,16 @@
         %>
 
         <div class="dashboard-header">
-            <h1>Producer Dashboard</h1>
-            <p>Welcome back, @<%= user.getUsername() %></p>
-            <p>Location: <%= user.getLocation() %></p> 
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h1>Producer Dashboard</h1>
+                    <p>Welcome back, @<%= user.getUsername() %> | <%= user.getLocation() %></p>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <a href="create_post.jsp" class="btn-save" style="text-decoration: none;">+ New Post</a>
+                    <a href="edit_profile.jsp" class="btn-save" style="text-decoration: none; background-color: #333; border: 1px solid #4CAF50;">Edit Profile</a>
+                </div>
+            </div>
         </div>
 
         <div class="stats-row">
@@ -47,67 +54,55 @@
             </div>
         </div>
 
-        <div class="profile-links">
-            <h2>Manage Your Wall Presence</h2>
-            
-            <% if(request.getParameter("status") != null) { %>
-                <p style="color: #4CAF50;">Profile updated successfully!</p>
-            <% } %>
+        <%-- MAIN CENTER CONTENT: The Post Wall --%>
+        <div style="max-width: 900px; margin: 40px auto;">
+            <div class="profile-links">
+                <h2 style="text-align: center; color: #4CAF50; margin-bottom: 30px;">Your Wall Feed</h2>
+                
+                <% if(request.getParameter("status") != null) { %>
+                    <p style="text-align: center; color: #4CAF50; font-weight: bold;">✔ Action Completed Successfully</p>
+                <% } %>
 
-            <form action="UpdateArtistServlet.do" method="POST">
-                <label>Spotify URL</label>
-                <input type="url" name="spotify" 
-                       value="<%= (artist.getSpotifyUrl() != null) ? artist.getSpotifyUrl() : "" %>" 
-                       placeholder="http://spotify.com/artist/...">
-
-                <label>SoundCloud URL</label>
-                <input type="url" name="soundcloud" 
-                       value="<%= (artist.getSoundCloudUrl() != null) ? artist.getSoundCloudUrl() : "" %>" 
-                       placeholder="https://soundcloud.com/...">
-
-                <label>YouTube URL</label>
-                <input type="url" name="youtube" 
-                       value="<%= (artist.getYoutubeUrl() != null) ? artist.getYoutubeUrl() : "" %>" 
-                       placeholder="https://youtube.com/...">
-
-                <label>Artist Bio / Genre</label>
-                <textarea name="bio" rows="4"><%= (artist.getBio() != null) ? artist.getBio() : "" %></textarea>
-
-                <input type="submit" value="Save Changes" class="btn-save">
-            </form>
-            
-            <div style="margin-top: 20px;">
-                <a href="create_post.jsp" class="btn-save" style="text-decoration: none; display: inline-block;">+ Create New Post</a>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Content</th>
+                            <th style="text-align: center;">Engagement</th>
+                            <th style="text-align: right;">Management</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <c:forEach var="p" items="${posts}">
+                            <tr>
+                                <td style="max-width: 400px; line-height: 1.4;">
+                                    <strong>${p.content}</strong><br>
+                                    <small style="color: #888;">Posted: ${p.creationDate}</small>
+                                </td>
+                                <td style="text-align: center; white-space: nowrap;">
+                                    ❤️ ${p.likes} | 💬 ${p.comments.size()}
+                                </td>
+                                <td style="text-align: right;">
+                                    <a href="PostPageServlet.do?postId=${p.id}" style="margin-right: 10px;">View</a>
+                                    <a href="DeletePostServlet.do?postId=${p.id}" 
+                                       style="color: #ff4444;" 
+                                       onclick="return confirm('Are you sure you want to delete this post?')">Delete</a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        <c:if test="${empty posts}">
+                            <tr>
+                                <td colspan="3" style="text-align: center; padding: 40px; color: #888;">
+                                    You haven't posted anything to the wall yet.
+                                </td>
+                            </tr>
+                        </c:if>
+                    </tbody>
+                </table>
             </div>
         </div>
 
-        <div style="margin-top: 40px;">
-            <h3>Your Recent Activity</h3>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Post Content</th>
-                        <th>Engagement</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <c:forEach var="p" items="${posts}">
-                        <tr>
-                            <td>${p.content}</td>
-                            <td>❤️ ${p.likes} | 💬 ${p.comments.size()}</td>
-                            <td>
-                                <a href="PostPageServlet.do?postId=${p.id}">View</a> | 
-                                <a href="DeletePostServlet.do?postId=${p.id}" 
-                                   style="color: #ff4444;" 
-                                   onclick="return confirm('Delete this post?')">Delete</a>
-                            </td>
-                        </tr>
-                    </c:forEach>
-                </tbody>
-            </table>
+        <div style="text-align: center; margin-bottom: 50px;">
+            <a href="LogoutServlet.do" class="btn-logout">Secure Logout</a>
         </div>
-
-        <a href="LogoutServlet.do" class="btn-logout">Secure Logout</a>
     </body>
 </html>

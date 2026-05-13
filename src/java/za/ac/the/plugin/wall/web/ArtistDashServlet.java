@@ -61,9 +61,9 @@ public class ArtistDashServlet extends HttpServlet {
                     }
                 }
 
-                request.setAttribute("posts", artistPosts);
-                request.setAttribute("totalLikes", totalLikes);
-                request.setAttribute("totalComments", totalComments);
+                session.setAttribute("posts", artistPosts);
+                session.setAttribute("totalLikes", totalLikes);
+                session.setAttribute("totalComments", totalComments);
 
                 request.getRequestDispatcher("artist_dashboard.jsp").forward(request, response);
                 
